@@ -28,8 +28,9 @@ session_start();
     if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
         echo "<p>Aucun produit en session...</p>";
     } else {
-        echo "<table>
-                <thead>
+        echo "<table class='table table-hover table-bordered'>
+                <caption>List of products</caption>
+                <thead class='thead-light'>
                     <tr>
                         <th>#</th>
                         <th>Nom</th>
@@ -39,6 +40,7 @@ session_start();
                     </tr>
                 </thead>
             <tbody>";
+        $qtt_sum = 0;
         $totalGeneral = 0;
         foreach ($_SESSION["products"] as $index => $product) {
             echo "<tr>
@@ -48,16 +50,18 @@ session_start();
                     <td>" . $product["qtt"] . "</td>
                     <td>" . number_format($product["total"], 2, ",", "&nbsp;") . "&nbsp;€</td>
                 </tr>";
+            $qtt_sum += $product["qtt"];
             $totalGeneral += $product["total"];
         }
         echo "<tr>
-                <td colspan =4>Total général : </td>
+                <th colspan =3>Total général : </th>
+                <td><strong>" . number_format($qtt_sum) . "</strong></td>
                 <td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong></td>
             </tr>
             </tbody>";
-
     }
     ?>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

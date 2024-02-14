@@ -24,7 +24,7 @@
         <div class="row">
             <div class="col align-self-center">
 
-                <h1>Ajouter un produit</h1>
+                <h1 class="mt-2">Ajouter un produit</h1>
                 <form action="traitement.php" method="post" class="m-3 mx-auto">
                     <p>
                         <label>
@@ -48,6 +48,17 @@
                         <input class="btn btn-primary" type="submit" name="submit" value="Ajouter le produit">
                     </p>
                 </form>
+
+                <p>Nombre de produits en session :
+                    <?php
+                    session_start();
+                    $qtt_sum = 0;
+                    foreach ($_SESSION["products"] as $product) {
+                        $qtt_sum += $product["qtt"];
+                    }
+                    echo $qtt_sum;
+                    ?>
+                </p>
 
 
             </div>
