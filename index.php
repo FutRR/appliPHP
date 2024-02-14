@@ -5,35 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajout produit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
 
-    <h1>Ajouter un produit</h1>
-    <form action="traitement.php" method="post">
-        <p>
-            <label>
-                Nom du produit :
-                <input type="text" name="name">
-            </label>
-        </p>
-        <p>
-            <label>
-                Prix du produit :
-                <input type="number" step="any" name="price">
-            </label>
-        </p>
-        <p>
-            <label>
-                Quantité désirée :
-                <input type="number" name="qtt" value="1">
-            </label>
-        </p>
-        <p>
-            <input type="submit" name="submit" value="Ajouter le produit">
-        </p>
-    </form>
+    <ul class="nav bg-dark">
+        <li class="nav-item">
+            <a href="#" class="nav-link active text-light" aria-current="page">Ajout</a>
+        </li>
+        <li class="nav-item">
+            <a href="recap.php" class="nav-link text-light">Récap</a>
+        </li>
+    </ul>
 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col align-self-center">
+
+                <h1>Ajouter un produit</h1>
+                <form action="traitement.php" method="post" class="m-3 mx-auto">
+                    <p>
+                        <label>
+                            Nom du produit :
+                            <input type="text" name="name" class="form-control">
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Prix du produit :
+                            <input type="number" step="any" name="price" class="form-control">
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            Quantité désirée :
+                            <input type="number" name="qtt" value="1" class="form-control">
+                        </label>
+                    </p>
+                    <p>
+                        <input class="btn btn-primary" type="submit" name="submit" value="Ajouter le produit">
+                    </p>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
