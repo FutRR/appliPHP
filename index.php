@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -25,7 +29,7 @@
             <div class="col align-self-center">
 
                 <h1 class="mt-2">Ajouter un produit</h1>
-                <form action="traitement.php" method="post" class="m-3 mx-auto">
+                <form action="traitement.php?action=add" method="POST" autocomplete="off" class="m-3 mx-auto">
                     <p>
                         <label>
                             Nom du produit :
@@ -49,9 +53,14 @@
                     </p>
                 </form>
 
+                <?php if (isset($_SESSION['products'])) {
+                    echo $_SESSION['valid_post'];
+                }
+
+                ?>
+
                 <p>Nombre de produits en session :
                     <?php
-                    session_start();
                     $qtt_sum = 0;
                     foreach ($_SESSION["products"] as $product) {
                         $qtt_sum += $product["qtt"];

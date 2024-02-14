@@ -28,7 +28,7 @@ session_start();
     if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
         echo "<p>Aucun produit en session...</p>";
     } else {
-        echo "<table class='table table-hover table-bordered'>
+        echo "<table class='table table-striped table-bordered'>
                 <caption>List of products</caption>
                 <thead class='thead-light'>
                     <tr>
@@ -47,8 +47,15 @@ session_start();
                     <td>" . $index . "</td>
                     <td>" . $product["name"] . "</td>
                     <td>" . number_format($product["price"], 2, ",", "&nbsp;") . "&nbsp;€</td>
-                    <td>" . $product["qtt"] . "</td>
+                    <td>
+                        <form action='traitement.php?action=down-qtt' method='POST'>
+                            <button class='border-0 bg-transparent'>-</button>
+                            " . $product["qtt"] . "
+                            <button action='traitement.php?action=up-qtt' class='border-0 bg-transparent'>+</button>
+                        </form
+                    </td>
                     <td>" . number_format($product["total"], 2, ",", "&nbsp;") . "&nbsp;€</td>
+                    <td><button action='traitement.php?action=delete' class=''>X</button></td>
                 </tr>";
             $qtt_sum += $product["qtt"];
             $totalGeneral += $product["total"];
