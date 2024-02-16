@@ -22,12 +22,6 @@ if (isset($_GET["action"])) {
 
                     $_SESSION["products"][] = $product;
 
-                    if (isset($_SESSION["products"])) {
-                        $valid = "Produit Ajouté";
-                    } else {
-                        $error = "Please enter valid fields";
-                    }
-
                 }
                 header("Location:index.php");
 
@@ -52,7 +46,12 @@ if (isset($_GET["action"])) {
             break;
 
         case "up-qtt":
-            header("Location:recap.php");
+            if (isset($_GET["add"])) {
+                $qtt = $_GET["add"];
+                $product[$qtt] = $product[$qtt] + 1;
+                $_SESSION["products"] = array_values($_SESSION["products"]);
+                header("Location:recap.php");
+            }
             break;
 
         case "down-qtt":

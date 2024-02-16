@@ -56,15 +56,18 @@ session_start();
                             <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
                         <td>
-                            <input type="button" class="border-0 bg-transparent" name="down-qtt" value="-">
+                            <a href="traitement.php?action=down-qtt&decrease=<?= $product["qtt"] ?>"
+                                class="link-dark text-decoration-none">-</a>
                             <?php echo $product["qtt"] ?>
-                            <input type="button" class="border-0 bg-transparent" name="up-qtt" value="+">
+                            <a href="traitement.php?action=up-qtt&add=<?= $product["qtt"] ?>"
+                                class="link-dark text-decoration-none">+</a>
                         </td>
                         <td>
                             <?php echo number_format($product["total"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
                         <td>
-                            <a href="traitement.php?action=delete&id=<?= $index ?>" class="btn btn-outline-danger">Supprimer</a>
+                            <a href="traitement.php?action=delete&id=<?= $index ?>" class="btn btn-outline-danger"
+                                onclick="deleteAlert()">Supprimer</a>
                         </td>
                     </tr>
                     <?php
@@ -98,7 +101,14 @@ session_start();
             crossorigin="anonymous"></script>
 
 
-        <!-- <script>function clearAlert() { alert('Session cleared'); }</script> -->
+        <script>function clearAlert() {
+                alert('Panier effacé');
+            }
+
+            function deleteAlert() {
+                alert("Produit supprimé");
+            }
+        </script>
 
 </body>
 
