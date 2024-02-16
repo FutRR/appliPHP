@@ -25,57 +25,48 @@ session_start();
     </ul>
 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col align-self-center">
+        <div class="col align-self-center">
 
-                <h1 class="mt-2">Ajouter un produit</h1>
-                <form action="traitement.php?action=add" method="POST" autocomplete="off" class="m-3 mx-auto">
-                    <p>
-                        <label>
-                            Nom du produit :
-                            <input type="text" name="name" class="form-control">
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            Prix du produit :
-                            <input type="number" step="any" name="price" class="form-control">
-                        </label>
-                    </p>
-                    <p>
-                        <label>
-                            Quantité désirée :
-                            <input type="number" name="qtt" value="1" class="form-control">
-                        </label>
-                    </p>
-                    <p>
-                        <input class="btn btn-primary" type="submit" name="submit" value="Ajouter le produit">
-                    </p>
-                </form>
-
-                <p>Nombre de produits en session :
-                    <?php
-                    if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
-                        echo "0";
-                    } else {
-                        $qtt_sum = 0;
-                        foreach ($_SESSION["products"] as $product) {
-                            $qtt_sum += $product["qtt"];
-                        }
-                        echo $qtt_sum;
-                    }
-                    ?>
-                </p>
-
+            <h1 class="mt-2">Ajouter un produit</h1>
+            <form action="traitement.php?action=add" method="POST" autocomplete="off" class="m-3 mx-auto">
                 <p>
-                    <?php
-                    if (isset($valid)) {
-                        echo $valid;
-                    }
-                    ?>
+                    <label>
+                        Nom du produit :
+                        <input type="text" name="name" class="form-control">
+                    </label>
                 </p>
+                <p>
+                    <label>
+                        Prix du produit :
+                        <input type="number" step="any" name="price" class="form-control">
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        Quantité désirée :
+                        <input type="number" name="qtt" value="1" class="form-control">
+                    </label>
+                </p>
+                <p>
+                    <input class="btn btn-primary" type="submit" name="submit" value="Ajouter le produit">
+                </p>
+            </form>
 
-            </div>
+            <p>Nombre de produits en session :
+                <?php
+                if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
+                    echo "0";
+                } else {
+                    $qtt_sum = 0;
+                    foreach ($_SESSION["products"] as $product) {
+                        $qtt_sum += $product["qtt"];
+                    }
+                    echo $qtt_sum;
+                }
+
+                ?>
+            </p>
+
         </div>
     </div>
 
