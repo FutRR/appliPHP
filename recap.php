@@ -37,6 +37,7 @@ session_start();
                         <th>Prix</th>
                         <th>Quantité</th>
                         <th>Total</th>
+                        <th class='text-center'>Delete</th>
                     </tr>
                 </thead>
             <tbody>";
@@ -47,15 +48,21 @@ session_start();
                     <td>" . $index . "</td>
                     <td>" . $product["name"] . "</td>
                     <td>" . number_format($product["price"], 2, ",", "&nbsp;") . "&nbsp;€</td>
-                    <td>
+                    <td class='d-flex justify-content-center align-items-stretch h-100'>
                         <form action='traitement.php?action=down-qtt' method='POST'>
-                            <button class='border-0 bg-transparent'>-</button>
+                            <button class='border-0 bg-transparent' name='down-qtt'>-</button>
+                        </form>
                             " . $product["qtt"] . "
-                            <button action='traitement.php?action=up-qtt' class='border-0 bg-transparent'>+</button>
+                        <form action='traitement.php?action=up-qtt' method='POST'>
+                            <button class='border-0 bg-transparent' name='up-qtt'>+</button>
                         </form
                     </td>
                     <td>" . number_format($product["total"], 2, ",", "&nbsp;") . "&nbsp;€</td>
-                    <td><button action='traitement.php?action=delete' class=''>X</button></td>
+                    <td>
+                        <form method='POST' action='traitement.php?action=delete?delete=$index' class='text-center'>
+                            <button name='delete' class='btn btn-outline-danger'>Delete</button>
+                        </form>
+                    </td>
                 </tr>";
             $qtt_sum += $product["qtt"];
             $totalGeneral += $product["total"];
@@ -64,6 +71,7 @@ session_start();
                 <th colspan =3>Total général : </th>
                 <td><strong>" . number_format($qtt_sum) . "</strong></td>
                 <td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong></td>
+                <td><form method='POST' action='traitement.php?action=clear' class='text-center'><button class='btn btn-outline-danger' name='clear' onclick='clearAlert()'>Clear</button></form></td>
             </tr>
             </tbody>";
     }
@@ -73,6 +81,12 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+    <?php
+    if (isset($clear)) {
+        echo $clear;
+    }
+    ?>
 </body>
 
 </html>

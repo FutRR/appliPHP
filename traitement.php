@@ -1,46 +1,60 @@
 <?php
 session_start();
 
-if (isset($_POST["submit"])) {
+if (isset($_GET["action"])) {
 
-    if (isset($_GET["action"])) {
+    switch ($_GET["action"]) {
+        case "add":
+            if (isset($_POST["submit"])) {
 
-        switch ($_GET["action"]) {
-            case "add":
-                break;
-            case "delete":
+                $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
+                $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
+
+                if ($name && $price && $qtt) {
+
+                    $product = [
+                        "name" => $name,
+                        "price" => $price,
+                        "qtt" => $qtt,
+                        "total" => $price * $qtt
+                    ];
+
+                    $_SESSION["products"][] = $product;
+
+                    if (isset($product)) {
+                        $valid = "<script>alert('Produit Ajouté');</script>";
+                    } else {
+                        $error = "<script>alert('Please enter valid fields');</script>";
+                    }
+
+                }
+            }
+            header("Location:index.php");
+            break;
+
+        case "delete":
+            if (isset($_GET['delete']) && (!empty($_GET['delete'] || $_GET['delete'] == 0))) {
+                unset($_SESSION['products'][$_GET['delete']]);
+                header("Location:recap.php");
+            }
+            break;
+
+        case "clear":
+            if (isset($_POST["clear"])) {
                 unset($_SESSION["products"]);
-                break;
-            case "clear":
-                break;
-            case "up-qtt":
-                $product["qtt"] += 1;
-                break;
-            case "down-qtt":
-                $product["qtt"] -= 1;
-                break;
-        }
-    }
+                header("Location:recap.php");
+                $clear = "<script>function clearAlert(){alert('Session cleared');}</script>";
+            }
+            break;
 
-    $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_STRING);
-    $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
+        case "up-qtt":
+            header("Location:recap.php");
+            break;
 
-    if ($name && $price && $qtt) {
-
-        $product = [
-            "name" => $name,
-            "price" => $price,
-            "qtt" => $qtt,
-            "total" => $price * $qtt
-        ];
-
-        $_SESSION["products"][] = $product;
-
-        $_SESSION["valid_post"] = "<div class='alert alert-success w-22' role='alert'>Produit Ajouté!
-        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-
+        case "down-qtt":
+            header("Location:recap.php");
+            break;
     }
 }
 
-header("Location:index.php");

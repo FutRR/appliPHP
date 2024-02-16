@@ -53,22 +53,19 @@ session_start();
                     </p>
                 </form>
 
-                <?php if (isset($_SESSION['products'])) {
-                    echo $_SESSION['valid_post'];
-                }
-
-                ?>
-
                 <p>Nombre de produits en session :
                     <?php
-                    $qtt_sum = 0;
-                    foreach ($_SESSION["products"] as $product) {
-                        $qtt_sum += $product["qtt"];
+                    if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
+                        echo "0";
+                    } else {
+                        $qtt_sum = 0;
+                        foreach ($_SESSION["products"] as $product) {
+                            $qtt_sum += $product["qtt"];
+                        }
+                        echo $qtt_sum;
                     }
-                    echo $qtt_sum;
                     ?>
                 </p>
-
 
             </div>
         </div>
@@ -78,6 +75,15 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+    <?php
+    if (isset($valid)) {
+        echo $valid;
+    }
+    if (isset($error)) {
+        echo $error;
+    }
+    ?>
 </body>
 
 </html>
