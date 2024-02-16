@@ -30,12 +30,10 @@ if (isset($_GET["action"])) {
 
                 }
             }
-            header("Location:index.php");
             break;
 
         case "delete":
-            if (isset($_GET['delete']) && (!empty($_GET['delete'] || $_GET['delete'] == 0))) {
-                unset($_SESSION['products'][$_GET['delete']]);
+            if (isset($_POST["delete"])) {
                 header("Location:recap.php");
             }
             break;
@@ -57,4 +55,6 @@ if (isset($_GET["action"])) {
             break;
     }
 }
+
+header("Location:index.php");
 

@@ -27,66 +27,83 @@ session_start();
     <?php
     if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
         echo "<p>Aucun produit en session...</p>";
-    } else {
-        echo "<table class='table table-striped table-bordered'>
-                <caption>List of products</caption>
-                <thead class='thead-light'>
+    } else { ?>
+        <table class="table table-striped table-bordered">
+            <caption>List of products</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $qtt_sum = 0;
+                $totalGeneral = 0;
+                foreach ($_SESSION["products"] as $index => $product) { ?>
                     <tr>
-                        <th>#</th>
-                        <th>Nom</th>
-                        <th>Prix</th>
-                        <th>Quantité</th>
-                        <th>Total</th>
-                        <th class='text-center'>Delete</th>
+                        <td>
+                            <?php echo $index ?>
+                        </td>
+                        <td>
+                            <?php echo $product["name"] ?>
+                        </td>
+                        <td>
+                            <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
+                        </td>
+                        <td class="d-flex justify-content-center align-items-stretch h-100">
+                            <input type="button" class="border-0 bg-transparent" name="down-qtt" value="-">
+                            <?php echo $product["qtt"] ?>
+                            <input type="button" class="border-0 bg-transparent" name="up-qtt" value="+">
+                        </td>
+                        <td>
+                            <?php echo number_format($product["total"], 2, ",", "&nbsp;") ?> &nbsp;€
+                        </td>
+                        <td>
+                            <form method="POST" action="traitement.php?action=delete" class="text-center">
+                                <input class="btn btn-outline-danger" type="submit" name="delete" value="Delete">
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-            <tbody>";
-        $qtt_sum = 0;
-        $totalGeneral = 0;
-        foreach ($_SESSION["products"] as $index => $product) {
-            echo "<tr>
-                    <td>" . $index . "</td>
-                    <td>" . $product["name"] . "</td>
-                    <td>" . number_format($product["price"], 2, ",", "&nbsp;") . "&nbsp;€</td>
-                    <td class='d-flex justify-content-center align-items-stretch h-100'>
-                        <form action='traitement.php?action=down-qtt' method='POST'>
-                            <button class='border-0 bg-transparent' name='down-qtt'>-</button>
-                        </form>
-                            " . $product["qtt"] . "
-                        <form action='traitement.php?action=up-qtt' method='POST'>
-                            <button class='border-0 bg-transparent' name='up-qtt'>+</button>
-                        </form
+                    <?php
+                    $qtt_sum += $product["qtt"];
+                    $totalGeneral += $product["total"];
+                }
+                ?>
+                <tr>
+                    <th colspan=3>Total général : </th>
+                    <td><strong>
+                            <?php echo number_format($qtt_sum) ?>
+                        </strong>
                     </td>
-                    <td>" . number_format($product["total"], 2, ",", "&nbsp;") . "&nbsp;€</td>
+                    <td><strong>
+                            <?php echo number_format($totalGeneral, 2, ",", "&nbsp;") ?> &nbsp;€
+                        </strong>
+                    </td>
                     <td>
-                        <form method='POST' action='traitement.php?action=delete?delete=$index' class='text-center'>
-                            <button name='delete' class='btn btn-outline-danger'>Delete</button>
-                        </form>
+                        <form method="POST" action="traitement.php?action=clear" class="text-center"><button
+                                class="btn btn-outline-danger" name="clear" onclick="clearAlert()">Clear</button></form>
                     </td>
-                </tr>";
-            $qtt_sum += $product["qtt"];
-            $totalGeneral += $product["total"];
+                </tr>
+            </tbody>
+            <?php
+    }
+    ?>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <?php
+        if (isset($clear)) {
+            echo $clear;
         }
-        echo "<tr>
-                <th colspan =3>Total général : </th>
-                <td><strong>" . number_format($qtt_sum) . "</strong></td>
-                <td><strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong></td>
-                <td><form method='POST' action='traitement.php?action=clear' class='text-center'><button class='btn btn-outline-danger' name='clear' onclick='clearAlert()'>Clear</button></form></td>
-            </tr>
-            </tbody>";
-    }
-    ?>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-    <?php
-    if (isset($clear)) {
-        echo $clear;
-    }
-    ?>
+        ?>
 </body>
 
 </html>
