@@ -28,8 +28,8 @@ session_start();
     if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
         echo "<p>Aucun produit en session...</p>";
     } else { ?>
-        <table class="table table-striped table-bordered">
-            <caption>List of products</caption>
+        <table class="table table-striped table-bordered text-center">
+            <caption class="text-center">Liste de produits</caption>
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
@@ -37,7 +37,7 @@ session_start();
                     <th>Prix</th>
                     <th>Quantité</th>
                     <th>Total</th>
-                    <th class="text-center">Delete</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,7 +55,7 @@ session_start();
                         <td>
                             <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
-                        <td class="d-flex justify-content-center align-items-stretch h-100">
+                        <td>
                             <input type="button" class="border-0 bg-transparent" name="down-qtt" value="-">
                             <?php echo $product["qtt"] ?>
                             <input type="button" class="border-0 bg-transparent" name="up-qtt" value="+">
@@ -64,9 +64,7 @@ session_start();
                             <?php echo number_format($product["total"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
                         <td>
-                            <form method="POST" action="traitement.php?action=delete" class="text-center">
-                                <input class="btn btn-outline-danger" type="submit" name="delete" value="Delete">
-                            </form>
+                            <a href="traitement.php?action=delete&id=<?= $index ?>" class="btn btn-outline-danger">Supprimer</a>
                         </td>
                     </tr>
                     <?php
@@ -85,8 +83,8 @@ session_start();
                         </strong>
                     </td>
                     <td>
-                        <form method="POST" action="traitement.php?action=clear" class="text-center"><button
-                                class="btn btn-outline-danger" name="clear" onclick="clearAlert()">Clear</button></form>
+                        <form method="POST" action="traitement.php?action=clear"><button class="btn btn-outline-danger"
+                                name="clear" onclick="clearAlert()">Effacer</button></form>
                     </td>
                 </tr>
             </tbody>
@@ -99,11 +97,9 @@ session_start();
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-        <?php
-        if (isset($clear)) {
-            echo $clear;
-        }
-        ?>
+
+        <!-- <script>function clearAlert() { alert('Session cleared'); }</script> -->
+
 </body>
 
 </html>

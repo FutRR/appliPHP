@@ -22,18 +22,24 @@ if (isset($_GET["action"])) {
 
                     $_SESSION["products"][] = $product;
 
-                    if (isset($product)) {
-                        $valid = "<script>alert('Produit Ajouté');</script>";
+                    if (isset($_SESSION["products"])) {
+                        $valid = "Produit Ajouté";
                     } else {
-                        $error = "<script>alert('Please enter valid fields');</script>";
+                        $error = "Please enter valid fields";
                     }
 
                 }
+                header("Location:index.php");
+
             }
             break;
 
         case "delete":
-            if (isset($_POST["delete"])) {
+            if (isset($_GET["id"])) {
+                $index = $_GET["id"];
+                unset($_SESSION['products'][$index]);
+                unset($product[$index]);
+                $_SESSION["products"] = array_values($_SESSION["products"]);
                 header("Location:recap.php");
             }
             break;
@@ -42,7 +48,6 @@ if (isset($_GET["action"])) {
             if (isset($_POST["clear"])) {
                 unset($_SESSION["products"]);
                 header("Location:recap.php");
-                $clear = "<script>function clearAlert(){alert('Session cleared');}</script>";
             }
             break;
 
@@ -56,5 +61,4 @@ if (isset($_GET["action"])) {
     }
 }
 
-header("Location:index.php");
 

@@ -67,6 +67,14 @@ session_start();
                     ?>
                 </p>
 
+                <p>
+                    <?php
+                    if (isset($valid)) {
+                        echo $valid;
+                    }
+                    ?>
+                </p>
+
             </div>
         </div>
     </div>
@@ -76,14 +84,6 @@ session_start();
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
-    <?php
-    if (isset($valid)) {
-        echo $valid;
-    }
-    if (isset($error)) {
-        echo $error;
-    }
-    ?>
 </body>
 
 </html>
