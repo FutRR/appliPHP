@@ -67,6 +67,12 @@ session_start();
                 ?>
             </p>
 
+            <?php if (isset($_SESSION["alert"])) {
+                echo $_SESSION["alert"];
+                unset($_SESSION["alert"]);
+            }
+            ?>
+
         </div>
     </div>
 

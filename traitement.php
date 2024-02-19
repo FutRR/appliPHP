@@ -22,11 +22,13 @@ if (isset($_GET["action"])) {
 
                     $_SESSION["products"][] = $product;
 
-                    $_SESSION["alert"] = "Produit Ajouté";
+                    $_SESSION["alert"] = "<p class='alert alert-success'>Produit Ajouté</p>";
 
+                } else {
+                    $_SESSION["alert"] = "<p class='alert alert-danger'>Erreur de formulaire</p>";
+                    header("Location:index.php");
                 }
 
-                $_SESSION["alert"] = "Erreur de formulaire";
 
                 header("Location:index.php");
 
@@ -39,6 +41,7 @@ if (isset($_GET["action"])) {
                 unset($_SESSION['products'][$index]);
                 unset($product[$index]);
                 header("Location:recap.php");
+                $_SESSION["alert"] = "<p class='alert-success text-center'>Produit supprimé</p>";
             }
             break;
 
@@ -46,6 +49,7 @@ if (isset($_GET["action"])) {
             if (isset($_POST["clear"])) {
                 unset($_SESSION["products"]);
                 header("Location:recap.php");
+                $_SESSION["alert"] = "<p class='alert-success text-center'>Panier effacé</p>";
             }
             break;
 

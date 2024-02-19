@@ -65,8 +65,7 @@ session_start();
                             <?php echo number_format($product["total"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
                         <td>
-                            <a href="traitement.php?action=delete&id=<?= $index ?>" class="btn btn-outline-danger"
-                                onclick="deleteAlert()">Supprimer</a>
+                            <a href="traitement.php?action=delete&id=<?= $index ?>" class="btn btn-outline-danger">Supprimer</a>
                         </td>
                     </tr>
                     <?php
@@ -86,11 +85,16 @@ session_start();
                     </td>
                     <td>
                         <form method="POST" action="traitement.php?action=clear"><button class="btn btn-outline-danger"
-                                name="clear" onclick="clearAlert()">Effacer</button></form>
+                                name="clear">Effacer</button></form>
                     </td>
                 </tr>
             </tbody>
             <?php
+    }
+
+    if (isset($_SESSION["alert"])) {
+        echo $_SESSION["alert"];
+        unset($_SESSION["alert"]);
     }
     ?>
 
@@ -98,16 +102,6 @@ session_start();
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-
-
-        <script>function clearAlert() {
-                alert('Panier effacé');
-            }
-
-            function deleteAlert() {
-                alert("Produit supprimé");
-            }
-        </script>
 
 </body>
 
