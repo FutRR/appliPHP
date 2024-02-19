@@ -56,11 +56,10 @@ session_start();
                             <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
                         </td>
                         <td>
-                            <a href="traitement.php?action=down-qtt&decrease=<?= $product["qtt"] ?>"
+                            <a href="traitement.php?action=down-qtt&id=<?= $index ?>"
                                 class="link-dark text-decoration-none">-</a>
                             <?php echo $product["qtt"] ?>
-                            <a href="traitement.php?action=up-qtt&add=<?= $product["qtt"] ?>"
-                                class="link-dark text-decoration-none">+</a>
+                            <a href="traitement.php?action=up-qtt&id=<?= $index ?>" class="link-dark text-decoration-none">+</a>
                         </td>
                         <td>
                             <?php echo number_format($product["total"], 2, ",", "&nbsp;") ?> &nbsp;€

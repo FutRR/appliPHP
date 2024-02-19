@@ -22,7 +22,12 @@ if (isset($_GET["action"])) {
 
                     $_SESSION["products"][] = $product;
 
+                    $_SESSION["alert"] = "Produit Ajouté";
+
                 }
+
+                $_SESSION["alert"] = "Erreur de formulaire";
+
                 header("Location:index.php");
 
             }
@@ -33,7 +38,6 @@ if (isset($_GET["action"])) {
                 $index = $_GET["id"];
                 unset($_SESSION['products'][$index]);
                 unset($product[$index]);
-                $_SESSION["products"] = array_values($_SESSION["products"]);
                 header("Location:recap.php");
             }
             break;
@@ -46,18 +50,27 @@ if (isset($_GET["action"])) {
             break;
 
         case "up-qtt":
-            if (isset($_GET["add"])) {
-                $qtt = $_GET["add"];
-                $product[$qtt] = $product[$qtt] + 1;
-                $_SESSION["products"] = array_values($_SESSION["products"]);
+            if (isset($_GET["id"])) {
+                $index = $_GET["id"];
+                $_SESSION['products'][$index]["qtt"]++;
+                $_SESSION['products'][$index]["total"] = $_SESSION['products'][$index]["price"] * $_SESSION['products'][$index]["qtt"];
                 header("Location:recap.php");
             }
             break;
 
         case "down-qtt":
-            header("Location:recap.php");
+            if (isset($_GET["id"])) {
+                $index = $_GET["id"];
+                if ($_SESSION['products'][$index]["qtt"] > 1) {
+                    $_SESSION['products'][$index]["qtt"]--;
+                    $_SESSION['products'][$index]["total"] = $_SESSION['products'][$index]["price"] * $_SESSION['products'][$index]["qtt"];
+                }
+                header("Location:recap.php");
+            }
             break;
     }
 }
+
+var_dump($_SESSION["products"]);
 
 
