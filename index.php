@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 ?>
 
 <!DOCTYPE html>
@@ -76,11 +77,14 @@ session_start();
         </div>
     </div>
 
+    <script>
+        if (document.title != "Ajout Produit") {
+            document.title = "Ajout Produit";
+        }
+    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <?php
+    $content = ob_get_clean();
 
-</body>
-
-</html>
+    require_once "template.php";
+    ?>
