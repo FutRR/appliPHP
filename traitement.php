@@ -74,7 +74,3 @@ if (isset($_GET["action"])) {
             break;
     }
 }
-
-var_dump($_SESSION["products"]);
-
-
