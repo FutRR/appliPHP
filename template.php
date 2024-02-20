@@ -1,3 +1,5 @@
+<?php require_once "function.php" ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -17,26 +19,13 @@
             <a href="index.php" class="nav-link text-light" aria-current="page">Ajout</a>
         </li>
         <li class="nav-item">
-            <a href="recap.php" class="nav-link text-light">Récap <span class="badge badge-pill badge-danger">
-                    <?php
-                    if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
-                        echo "0";
-                    } else {
-                        $qtt_sum = 0;
-                        foreach ($_SESSION["products"] as $product) {
-                            $qtt_sum += $product["qtt"];
-                        }
-                        echo $qtt_sum;
-                    }
-
-                    ?>
-
+            <a href="recap.php" class="nav-link text-light position-relative">Récap <span
+                    class="position-absolute top-50 start-100 translate-middle badge rounded-pill bg-danger">
+                    <?= afficherCount() ?>
                 </span>
             </a>
-            </div>
         </li>
     </ul>
-
 
     <?= $content ?>
 
