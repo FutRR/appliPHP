@@ -17,7 +17,23 @@
             <a href="index.php" class="nav-link text-light" aria-current="page">Ajout</a>
         </li>
         <li class="nav-item">
-            <a href="recap.php" class="nav-link text-light">Récap</a>
+            <a href="recap.php" class="nav-link text-light">Récap <span class="badge badge-pill badge-danger">
+                    <?php
+                    if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
+                        echo "0";
+                    } else {
+                        $qtt_sum = 0;
+                        foreach ($_SESSION["products"] as $product) {
+                            $qtt_sum += $product["qtt"];
+                        }
+                        echo $qtt_sum;
+                    }
+
+                    ?>
+
+                </span>
+            </a>
+            </div>
         </li>
     </ul>
 
