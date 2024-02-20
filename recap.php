@@ -1,18 +1,7 @@
 <?php
 session_start();
 ob_start();
-?>
 
-<ul class="nav bg-dark">
-    <li class="nav-item">
-        <a href="index.php" class="nav-link text-light" aria-current="page">Ajout</a>
-    </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link active text-light">Récap</a>
-    </li>
-</ul>
-
-<?php
 if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
     echo "<p>Aucun produit en session...</p>";
 } else { ?>

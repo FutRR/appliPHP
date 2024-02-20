@@ -14,6 +14,15 @@
 
 <body>
 
+    <ul class="nav bg-dark">
+        <li class="nav-item">
+            <a href="index.php" class="nav-link text-light" aria-current="page">Ajout</a>
+        </li>
+        <li class="nav-item">
+            <a href="recap.php" class="nav-link text-light">Récap</a>
+        </li>
+    </ul>
+
 
     <?= $content ?>
 
