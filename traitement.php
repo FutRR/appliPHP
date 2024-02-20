@@ -94,6 +94,11 @@ if (isset($_GET["action"])) {
                 if ($_SESSION['products'][$index]["qtt"] > 1) {
                     $_SESSION['products'][$index]["qtt"]--;
                     $_SESSION['products'][$index]["total"] = $_SESSION['products'][$index]["price"] * $_SESSION['products'][$index]["qtt"];
+                } else {
+                    unset($_SESSION['products'][$index]);
+                    header("Location:recap.php");
+                    $_SESSION["alert"] = "<p class='alert-success text-center'>Produit supprimé</p>";
+
                 }
                 header("Location:recap.php");
             }
