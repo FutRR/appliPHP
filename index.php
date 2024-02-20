@@ -7,7 +7,8 @@ ob_start();
     <div class="col align-self-center">
 
         <h1 class="mt-2">Ajouter un produit</h1>
-        <form action="traitement.php?action=add" method="POST" autocomplete="off" class="m-3 mx-auto">
+        <form action="traitement.php?action=add" method="POST" autocomplete="off" enctype="multipart/form-data"
+            class="m-3 mx-auto">
             <p>
                 <label>
                     Nom du produit :
@@ -24,6 +25,12 @@ ob_start();
                 <label>
                     Quantité désirée :
                     <input type="number" name="qtt" value="1" class="form-control">
+                </label>
+            </p>
+            <p>
+                <label>
+                    Image :
+                    <input type="file" name="file" class="form-control">
                 </label>
             </p>
             <p>

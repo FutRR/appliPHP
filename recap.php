@@ -11,6 +11,7 @@ if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
             <tr>
                 <th>#</th>
                 <th>Nom</th>
+                <th>Image</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
@@ -28,6 +29,9 @@ if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
                     </td>
                     <td>
                         <?php echo $product["name"] ?>
+                    </td>
+                    <td class="col-md-2">
+                        <img src="./upload/<?= $product['file'] ?>" alt="" class="rounded mx-auto d-block img-fluid">
                     </td>
                     <td>
                         <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
@@ -50,7 +54,7 @@ if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
             }
             ?>
             <tr>
-                <th colspan=3>Total général : </th>
+                <th colspan=4>Total général : </th>
                 <td><strong>
                         <?php echo number_format($qtt_sum) ?>
                     </strong>
