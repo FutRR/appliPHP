@@ -5,17 +5,18 @@ ob_start();
 if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
     echo "<p>Aucun produit en session...</p>";
 } else { ?>
-    <table class="table table-striped table-bordered text-center">
+    <table class="table table-striped table-bordered text-center align-middle">
         <caption class="text-center">Liste de produits</caption>
         <thead class="thead-light">
             <tr>
                 <th>#</th>
                 <th>Nom</th>
+                <th>Description</th>
                 <th>Image</th>
                 <th>Prix</th>
                 <th>Quantité</th>
                 <th>Total</th>
-                <th>Delete</th>
+                <th>Supprimer</th>
             </tr>
         </thead>
         <tbody>
@@ -30,8 +31,16 @@ if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
                     <td>
                         <?php echo $product["name"] ?>
                     </td>
+                    <td>
+                        <?php echo $product["desc"] ?>
+                    </td>
                     <td class="col-md-2">
-                        <img src="./upload/<?= $product['file'] ?>" alt="" class="rounded mx-auto d-block img-fluid">
+                        <?php if (!isset($product["file"]) || empty($product["file"])) {
+                            echo "Aucune image" ?>
+                        <?php } else { ?>
+                            <img src="./upload/<?= $product['file'] ?>" alt="" class="rounded mx-auto d-block img-fluid">
+                        <?php }
+                        ?>
                     </td>
                     <td>
                         <?php echo number_format($product["price"], 2, ",", "&nbsp;") ?> &nbsp;€
@@ -54,7 +63,7 @@ if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
             }
             ?>
             <tr>
-                <th colspan=4>Total général : </th>
+                <th colspan=5>Total général : </th>
                 <td><strong>
                         <?php echo number_format($qtt_sum) ?>
                     </strong>

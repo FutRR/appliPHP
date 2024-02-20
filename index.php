@@ -8,27 +8,33 @@ ob_start();
 
         <h1 class="mt-2">Ajouter un produit</h1>
         <form action="traitement.php?action=add" method="POST" autocomplete="off" enctype="multipart/form-data"
-            class="m-3 mx-auto">
+            class="mb-3 mx-auto">
             <p>
-                <label>
+                <label class="form-label">
                     Nom du produit :
                     <input type="text" name="name" class="form-control">
                 </label>
             </p>
             <p>
-                <label>
-                    Prix du produit :
-                    <input type="number" step="any" name="price" class="form-control">
+                <label class="form-label">
+                    Description du produit :
+                    <textarea name="desc" class="form-control" rows="3"></textarea>
                 </label>
             </p>
             <p>
-                <label>
+                <label class="form-label">
+                    Prix du produit :
+                    <input type="number" step="any" name="price" class="form-control" min="1">
+                </label>
+            </p>
+            <p>
+                <label class="form-label">
                     Quantité désirée :
                     <input type="number" name="qtt" value="1" class="form-control">
                 </label>
             </p>
             <p>
-                <label>
+                <label class="form-label">
                     Image :
                     <input type="file" name="file" class="form-control">
                 </label>
@@ -37,21 +43,6 @@ ob_start();
                 <input class="btn btn-primary" type="submit" name="submit" value="Ajouter le produit">
             </p>
         </form>
-
-        <p>Nombre de produits en session :
-            <?php
-            if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
-                echo "0";
-            } else {
-                $qtt_sum = 0;
-                foreach ($_SESSION["products"] as $product) {
-                    $qtt_sum += $product["qtt"];
-                }
-                echo $qtt_sum;
-            }
-
-            ?>
-        </p>
 
         <?php if (isset($_SESSION["alert"])) {
             echo $_SESSION["alert"];
